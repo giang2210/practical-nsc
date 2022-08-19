@@ -4,10 +4,7 @@ package com.example.sqlinjection.dao;
 import com.example.sqlinjection.model.User;
 import com.example.sqlinjection.utils.ConnectionUtils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class UserDao {
     Connection connection = ConnectionUtils.getConnection();
@@ -17,10 +14,9 @@ public class UserDao {
 //        String sql = "select * from users where username = '"+pName +"' and password = " +password;
         String sql = "select * from users where username = ? and password = ?";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, pName);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
+            Statement statement = connection.createStatement();
+            String sqlStatement = String.format("select * from users where username = '"+pName +"' and password = " +password);
+            ResultSet rs = statement.executeQuery(sqlStatement);
             while (rs.next()){
                 String name = rs.getString("username");
                 String pass = rs.getString("password");

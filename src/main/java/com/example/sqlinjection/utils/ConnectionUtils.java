@@ -9,9 +9,9 @@ public class ConnectionUtils {
     private static Connection connection;
 
     public synchronized static Connection getConnection() {
-        String url = "jdbc:mysql://localhost:3306/NSC";
+        String url = "jdbc:mysql://localhost:3306/practical-nsc";
         String user = "root";
-        String pass = "root";
+        String pass = "";
         if (connection == null) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
